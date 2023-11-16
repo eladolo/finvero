@@ -8,6 +8,8 @@ services:
       - "8002:5002"
     volumes:
       - dbapp:/dbapp
+    env_file:
+      - .env
     depends_on:
       db:
         condition: service_healthy

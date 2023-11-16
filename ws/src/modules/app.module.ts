@@ -8,12 +8,11 @@ import { AppService } from '../services/app.service';
   imports: [
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'db',
-      port: 3306,
-      username: 'user',
-      password: 'password',
-      database: 'db',
-      entities: [],
+      host: process.env.DB_HOST,
+      port: Number(process.env.DB_PORT),
+      username: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_NAME,
       synchronize: false,
       autoLoadEntities: true,
     }),
