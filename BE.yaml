@@ -25,7 +25,7 @@ services:
       dockerfile: DockerfileWS
     command: npm run start
     ports:
-      - "8001:5001"
+      - "8001:3000"
     volumes:
       - ws:/ws
     depends_on:
