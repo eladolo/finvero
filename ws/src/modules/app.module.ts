@@ -3,9 +3,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
 import { AppController } from '../controllers/app.controller';
 import { AppService } from '../services/app.service';
-
+import { UsuarioModule } from '../modules/Usuario.module';
 @Module({
   imports: [
+    UsuarioModule,
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: process.env.DB_HOST,
