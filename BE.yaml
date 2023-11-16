@@ -23,7 +23,7 @@ services:
     build:
       context: .
       dockerfile: DockerfileWS
-    command: npm run start
+    command: npm run start:dev
     ports:
       - "8001:3000"
     volumes:
