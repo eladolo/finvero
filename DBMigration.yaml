@@ -1,0 +1,15 @@
+services:
+  dbapp:
+    build:
+      context: .
+      dockerfile: DockerfileDBAPP
+    command: npm run migrate
+    ports:
+      - "8002:5002"
+    volumes:
+      - dbapp:/dbapp
+    depends_on:
+      db:
+        condition: service_healthy
+volumes:
+  dbapp:

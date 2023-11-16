@@ -1,0 +1,19 @@
+{
+  "name": "dbapp",
+  "version": "1.0.0",
+  "description": "sequalizer app",
+  "main": "index.js",
+  "scripts": {
+    "migrate": "sequelize db:migrate"
+  },
+  "keywords": [
+    "sequelizer"
+  ],
+  "author": "eladolo@chakstudio.com",
+  "license": "ISC",
+  "dependencies": {
+    "mysql2": "^3.6.3",
+    "sequelize": "^6.35.0",
+    "sequelize-cli": "^6.6.2"
+  }
+}

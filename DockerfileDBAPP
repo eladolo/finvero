@@ -1,0 +1,9 @@
+FROM base-image
+
+COPY ./dbapp ./dbapp
+
+WORKDIR /dbapp
+
+RUN npm install
+
+EXPOSE 5002

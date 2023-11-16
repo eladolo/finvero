@@ -1,0 +1,9 @@
+FROM base-image
+
+COPY ./ws ./ws
+
+WORKDIR /ws
+
+RUN npm install
+
+EXPOSE 5001

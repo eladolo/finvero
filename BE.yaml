@@ -1,0 +1,36 @@
+services:
+  db:
+    image: mysql:5.7
+    platform: linux/amd64
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'db'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'password'
+      MYSQL_ROOT_PASSWORD: 'password'
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    volumes:
+      - my-db:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3306"]
+      interval: 18s
+      timeout: 6s
+      retries: 3
+  ws:
+    build:
+      context: .
+      dockerfile: DockerfileWS
+    command: npm run start
+    ports:
+      - "8001:5001"
+    volumes:
+      - ws:/ws
+    depends_on:
+      db:
+        condition: service_healthy
+volumes:
+  ws:
+  my-db:
