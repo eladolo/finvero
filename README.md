@@ -1,3 +1,12 @@
+**Set .env on root proyect folder**
+```
+DB_USER=user
+DB_PASSWORD=password
+DB_NAME=db
+DB_HOST=db
+DB_PORT=3306
+```
+
 **Build base**
 ```
 docker build -f Dockerfile -t base-image .
