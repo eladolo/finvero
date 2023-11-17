@@ -5,6 +5,7 @@ DB_PASSWORD=password
 DB_NAME=db
 DB_HOST=db
 DB_PORT=3306
+JWT_SECRET=some_weird_and_long_secret_string
 ```
 
 **Build base**

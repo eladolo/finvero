@@ -12,6 +12,7 @@
   "author": "eladolo@chakstudio.com",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "dotenv": "^16.3.1",
     "mysql2": "^3.6.3",
     "sequelize": "^6.35.0",

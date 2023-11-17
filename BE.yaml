@@ -27,8 +27,7 @@ services:
     ports:
       - "8001:3000"
     volumes:
-      - ./ws/:/ws
-      - ws:/ws/node_modules
+      - ./ws:/ws
     env_file:
       - .env
     depends_on:
