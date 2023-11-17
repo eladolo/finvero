@@ -1,35 +1,44 @@
 import { JwtService } from '@nestjs/jwt';
-import { Injectable, NestMiddleware, HttpException, HttpStatus } from '@nestjs/common';
+import {
+    Injectable,
+    NestMiddleware,
+    HttpException,
+    HttpStatus,
+} from '@nestjs/common';
 import { Request, Response, NextFunction } from 'express';
 import { UsuarioServicio } from '../services/Usuario.service';
 interface UserRequest extends Request {
-    user: any
+    user: any;
 }
 @Injectable()
 export class isAuthenticated implements NestMiddleware {
-    constructor(private readonly jwt: JwtService, private readonly service: UsuarioServicio) { }
+    constructor(
+        private readonly jwt: JwtService,
+        private readonly service: UsuarioServicio,
+    ) {}
     async use(req: UserRequest, res: Response, next: NextFunction) {
-        try{
+        try {
             if (
                 req.headers.authorization &&
                 req.headers.authorization.startsWith('Bearer')
             ) {
                 const token = req.headers.authorization.split(' ')[1];
                 const decoded = await this.jwt.verify(token);
-                const user = await this.service.findOneByEmail(decoded.email)
+                const user = await this.service.findOneByEmail(decoded.email);
                 if (user) {
-                    req.user = user
-                    next()
+                    req.user = user;
+                    next();
                 } else {
-                    throw new HttpException('Unauthorized', HttpStatus.UNAUTHORIZED)
-
+                    throw new HttpException(
+                        'Unauthorized',
+                        HttpStatus.UNAUTHORIZED,
+                    );
                 }
             } else {
-                throw new HttpException('No token found', HttpStatus.NOT_FOUND)
-
+                throw new HttpException('No token found', HttpStatus.NOT_FOUND);
             }
         } catch {
-            throw new HttpException('Unauthorized', HttpStatus.UNAUTHORIZED)
-       }
+            throw new HttpException('Unauthorized', HttpStatus.UNAUTHORIZED);
+        }
     }
 }

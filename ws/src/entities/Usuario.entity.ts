@@ -1,23 +1,23 @@
 import { Entity, Column, PrimaryGeneratedColumn, PrimaryColumn } from 'typeorm';
 
 @Entity({
-  name:'Usuarios',
-  schema:'Usuarios',
+    name: 'Usuarios',
+    schema: 'Usuarios',
 })
 export class Usuarios {
-  @PrimaryGeneratedColumn()
-  id: number;
+    @PrimaryGeneratedColumn()
+    id: number;
 
-  @PrimaryColumn()
-  @Column()
-  email: string;
+    @PrimaryColumn()
+    @Column()
+    email: string;
 
-  @Column()
-  nombre: string;
+    @Column()
+    nombre: string;
 
-  @Column()
-  password: string;
+    @Column()
+    password: string;
 
-  @Column()
-  role: string;
+    @Column()
+    role: string;
 }
