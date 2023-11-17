@@ -15,9 +15,8 @@ import { Usuarios } from '../entities/Usuario.entity';
   }),
   ServeStaticModule.forRoot({
     rootPath: join(__dirname, '..', 'public'),
-  }),
-  ],
+  })],
   providers: [UsuarioServicio],
-  controllers: [UsuarioController],
+  controllers: [UsuarioController]
 })
 export class UsuarioModule {}
