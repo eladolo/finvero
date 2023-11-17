@@ -9,10 +9,20 @@ import { UsuarioModule } from '../modules/Usuario.module';
 import { UsuarioController } from '../controllers/Usuario.controller';
 import { UsuarioServicio } from '../services/Usuario.service';
 import { Usuarios } from '../entities/Usuario.entity';
+import { ProductosModule } from '../modules/Productos.module';
+import { ProductosController } from '../controllers/Productos.controller';
+import { ProductosServicio } from '../services/Producto.service';
+import { Productos } from '../entities/Producto.entity';
+import { OrdenesModule } from '../modules/Ordenes.module';
+import { OrdenesController } from '../controllers/Ordenes.controller';
+import { OrdenesServicio } from '../services/Orden.service';
+import { Ordenes } from '../entities/Orden.entity';
 @Module({
     imports: [
         Repository,
         UsuarioModule,
+        ProductosModule,
+        OrdenesModule,
         TypeOrmModule.forRoot({
             type: 'mysql',
             host: process.env.DB_HOST,
@@ -23,14 +33,14 @@ import { Usuarios } from '../entities/Usuario.entity';
             synchronize: false,
             autoLoadEntities: true,
         }),
-        TypeOrmModule.forFeature([Usuarios]),
+        TypeOrmModule.forFeature([Usuarios, Productos, Ordenes]),
         JwtModule.register({
             secret: process.env.JWT_SECRET,
             signOptions: { expiresIn: '2h' },
         }),
     ],
     controllers: [AppController],
-    providers: [AppService, UsuarioServicio],
+    providers: [AppService, UsuarioServicio, ProductosServicio, OrdenesServicio],
 })
 export class AppModule {
     constructor(private dataSource: DataSource) {}
@@ -38,6 +48,6 @@ export class AppModule {
         consumer
             .apply(isAuthenticated)
             .exclude({ path: '/', method: RequestMethod.GET })
-            .forRoutes(UsuarioController);
+            .forRoutes(UsuarioController, ProductosController, OrdenesController);
     }
 }
