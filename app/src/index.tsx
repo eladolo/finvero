@@ -1,20 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { RouterProvider } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import './assets/index.css';
-import App from './components/App';
-import ErrorPage from './components/UI/ErrorPage';
 import reportWebVitals from './reportWebVitals';
 import store from './stores/globalStore';
+import router from './routes/global';
 
-const router = createBrowserRouter([
-    {
-        path: '/',
-        element: <App />,
-        errorElement: <ErrorPage />,
-    },
-]);
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement,
 );
