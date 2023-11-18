@@ -2,7 +2,7 @@ services:
   fe:
     build:
       context: ../
-      dockerfile: DEV/Dockerfile.FE
+      dockerfile: _DEV/Dockerfile.FE
     command: npm run start
     ports:
       - "8000:3000"

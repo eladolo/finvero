@@ -30,9 +30,13 @@ export class SignupServicio {
         if (foundUser) {
             const { password } = foundUser;
             if (await bcrypt.compare(user.password, password)) {
-                const payload = { email: user.email };
+                const payload = { email: user.email, uid: foundUser.id, role: foundUser.role };
                 return {
                     token: jwt.sign(payload),
+                    uid: foundUser.id,
+                    role: foundUser.role,
+                    email: foundUser.email,
+                    nombre: foundUser.nombre
                 };
             }
             return new HttpException(

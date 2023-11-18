@@ -1,4 +1,4 @@
-**Set .env on DEV proyect folder**
+**Set .env on _DEV proyect folder**
 ```
 DB_USER=user
 DB_PASSWORD=password
@@ -10,7 +10,7 @@ JWT_SECRET=some_weird_and_long_secret_string
 
 **From the root folder of the proyect Build the base image**
 ```
-docker build -f DEV/Dockerfile -t base-image .
+docker build -f _DEV/Dockerfile.base -t base-image .
 ```
 
 **Execute base image**
@@ -20,7 +20,7 @@ docker run --rm base-image
 
 **Execute compose**
 ```
-docker compose -f DEV/compose.BE.yaml -f DEV/compose.FE.yaml -f DEV/compose.DB.yaml up
+docker compose -f _DEV/compose.BE.yaml -f _DEV/compose.FE.yaml -f _DEV/compose.DB.yaml up
 ```
 
 **Access FE App**

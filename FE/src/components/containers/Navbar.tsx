@@ -1,5 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 
 const Navbar = () => {
     const iconHome: any = "fa-solid fa-house"
@@ -7,9 +8,11 @@ const Navbar = () => {
     const iconUsers: any = "fa-solid fa-user"
     const iconLogout: any = "fa-solid fa-lock"
     
+    const dispatch = useDispatch()
     const navigate = useNavigate()
     const logout = () => {
         sessionStorage.removeItem('token')
+        dispatch({type: 'users/setUser', payload: null });
         navigate('/')
     }
     const gotTo: any = (route: string) => {

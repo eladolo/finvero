@@ -22,7 +22,7 @@ services:
   be:
     build:
       context: ../
-      dockerfile: DEV/Dockerfile.BE
+      dockerfile: _DEV/Dockerfile.BE
     command: npm run start:dev
     ports:
       - "8001:3000"

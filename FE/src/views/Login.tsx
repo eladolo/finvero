@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -6,6 +7,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import '../assets/Login.css';
 
 function Login() {
+    const dispatch = useDispatch()
     const [errorMessage, setErrorMessage] = useState('');
     const [user, setUser] = useState('');
     const [email, setEmail] = useState('');
@@ -33,6 +35,7 @@ function Login() {
                 setErrorMessage(data.response);
             } else {
                 sessionStorage.setItem('token', data.token);
+                dispatch({type: 'users/setUser', payload: data });
                 navigate('/dashboard');
             }
         } catch (error: any) {

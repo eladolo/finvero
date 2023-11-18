@@ -2,7 +2,7 @@ services:
   dbapp:
     build:
       context: ../
-      dockerfile: DEV/Dockerfile.DB
+      dockerfile: _DEV/Dockerfile.DB
     command: npm run migrate
     ports:
       - "8002:5002"
