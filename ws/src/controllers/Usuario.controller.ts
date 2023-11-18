@@ -1,13 +1,11 @@
 import {
     Body,
     Controller,
-    Delete,
     Get,
     HttpStatus,
-    Param,
     Post,
-    UploadedFiles,
-    Put,
+    Patch,
+    Delete,
     Req,
     Res,
 } from '@nestjs/common';
@@ -22,6 +20,18 @@ export class UsuarioController {
         private jwt: JwtService,
     ) {}
 
+    @Get()
+    async usuarios(@Res() response: any): Promise<Usuarios[]> {
+        const usuarios = await this.service.findAll();
+        return response.status(HttpStatus.OK).json(usuarios);
+    }
+
+    @Post()
+    async createUsuario(@Res() response: any): Promise<Usuarios[]> {
+        const usuarios = await this.service.add(Req.arguments.orden);
+        return response.status(HttpStatus.OK).json(usuarios);
+    }
+
     @Post('/signup')
     async Signup(@Res() response: any, @Body() user: Usuarios) {
         const newUSer = await this.service.signup(user);
@@ -35,9 +45,15 @@ export class UsuarioController {
         return response.status(HttpStatus.OK).json(1234);
     }
 
-    @Get()
-    async usuarios(@Res() response: any): Promise<Usuarios[]> {
-        const usuarios = await this.service.findAll();
+    @Patch()
+    async updateUsuario(@Res() response: any): Promise<Usuarios[]> {
+        const usuarios = await this.service.update(Req.arguments.orden);
+        return response.status(HttpStatus.OK).json(usuarios);
+    }
+
+    @Delete()
+    async deleteUsuario(@Res() response: any): Promise<Usuarios[]> {
+        const usuarios = await this.service.remove(Req.arguments.id);
         return response.status(HttpStatus.OK).json(usuarios);
     }
 }

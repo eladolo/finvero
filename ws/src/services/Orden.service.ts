@@ -22,6 +22,14 @@ export class OrdenesServicio {
         return this.repo.findBy({ uid });
     }
 
+    async add(orden: Ordenes): Promise<void> {
+        await this.repo.create(orden);
+    }
+
+    async update(orden: Ordenes): Promise<void> {
+        await this.repo.update(orden.id, orden);
+    }
+
     async remove(id: number): Promise<void> {
         await this.repo.delete({ id });
     }

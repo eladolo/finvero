@@ -22,6 +22,14 @@ export class ProductosServicio {
         return this.repo.findBy({ uid });
     }
 
+    async add(producto: Productos): Promise<void> {
+        await this.repo.create(producto);
+    }
+
+    async update(producto: Productos): Promise<void> {
+        await this.repo.update(producto.id, producto);
+    }
+
     async remove(id: number): Promise<void> {
         await this.repo.delete({ id });
     }

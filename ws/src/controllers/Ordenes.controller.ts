@@ -1,11 +1,10 @@
 import {
-    Body,
     Controller,
     Delete,
     Get,
     HttpStatus,
-    Param,
     Post,
+    Patch,
     Req,
     Res,
 } from '@nestjs/common';
@@ -26,9 +25,27 @@ export class OrdenesController {
         return response.status(HttpStatus.OK).json(productos);
     }
 
-    @Post()
+    @Get('/user')
     async ordenesbyUser(@Res() response: any): Promise<Ordenes[]> {
         const ordenes = await this.service.findByUID(Req.arguments.uid);
+        return response.status(HttpStatus.OK).json(ordenes);
+    }
+
+    @Post()
+    async createOrder(@Res() response: any): Promise<Ordenes[]> {
+        const ordenes = await this.service.add(Req.arguments.orden);
+        return response.status(HttpStatus.OK).json(ordenes);
+    }
+
+    @Patch()
+    async updateOrder(@Res() response: any): Promise<Ordenes[]> {
+        const ordenes = await this.service.update(Req.arguments.orden);
+        return response.status(HttpStatus.OK).json(ordenes);
+    }
+
+    @Delete()
+    async deleteOrder(@Res() response: any): Promise<Ordenes[]> {
+        const ordenes = await this.service.remove(Req.arguments.id);
         return response.status(HttpStatus.OK).json(ordenes);
     }
 }

@@ -24,6 +24,14 @@ export class UsuarioServicio {
         return this.repo.findOneBy({ email });
     }
 
+    async add(usuario: Usuarios): Promise<void> {
+        await this.repo.create(usuario);
+    }
+
+    async update(usuario: Usuarios): Promise<void> {
+        await this.repo.update(usuario.id, usuario);
+    }
+
     async remove(id: number): Promise<void> {
         await this.repo.delete({ id });
     }

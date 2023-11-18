@@ -1,13 +1,10 @@
 import {
-    Body,
     Controller,
     Delete,
     Get,
     HttpStatus,
-    Param,
     Post,
-    UploadedFiles,
-    Put,
+    Patch,
     Req,
     Res,
 } from '@nestjs/common';
@@ -28,9 +25,27 @@ export class ProductosController {
         return response.status(HttpStatus.OK).json(productos);
     }
 
-    @Post()
+    @Get('/user')
     async productosbyUser(@Res() response: any): Promise<Productos[]> {
         const productos = await this.service.findByUID(Req.arguments.uid);
+        return response.status(HttpStatus.OK).json(productos);
+    }
+
+    @Post()
+    async createOrder(@Res() response: any): Promise<Productos[]> {
+        const productos = await this.service.add(Req.arguments.producto);
+        return response.status(HttpStatus.OK).json(productos);
+    }
+
+    @Patch()
+    async updateOrder(@Res() response: any): Promise<Productos[]> {
+        const productos = await this.service.update(Req.arguments.producto);
+        return response.status(HttpStatus.OK).json(productos);
+    }
+
+    @Delete()
+    async deleteOrder(@Res() response: any): Promise<Productos[]> {
+        const productos = await this.service.remove(Req.arguments.id);
         return response.status(HttpStatus.OK).json(productos);
     }
 }
