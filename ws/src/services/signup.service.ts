@@ -16,8 +16,17 @@ export class SignupServicio {
         return this.repo.findOneBy({ email });
     }
 
+    findOneByName(nombre: string): Promise<Usuarios | null> {
+        return this.repo.findOneBy({ nombre });
+    }
+
     async signin(user: Usuarios, jwt: JwtService): Promise<any> {
-        const foundUser = await this.findOneByEmail(user.email);
+        let foundUser: any = false;
+        if (user.email !== '') {
+            foundUser = await this.findOneByEmail(user.email);
+        } else if (user.nombre !== '') {
+            foundUser = await this.findOneByName(user.nombre);
+        }
         if (foundUser) {
             const { password } = foundUser;
             if (await bcrypt.compare(user.password, password)) {

@@ -25,7 +25,7 @@ export class SignupController {
     }
     @Post('/signin')
     async SignIn(@Res() response: any, @Body() user: Usuarios) {
-        const token = await this.service.signin(user, this.jwt);
-        return response.status(HttpStatus.OK).json(1234);
+        const data = await this.service.signin(user, this.jwt);
+        return response.status(HttpStatus.OK).json(data);
     }
 }

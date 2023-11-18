@@ -1,14 +1,73 @@
-import React from 'react';
-import logo from '../assets/logo.svg';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import 'bootstrap/dist/css/bootstrap.css';
 import '../assets/Login.css';
 
 function Login() {
+    const [errorMessage, setErrorMessage] = useState('');
+    const [user, setUser] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const iconSend: any = "fa-solid fa-share";
+    let navigate = useNavigate();
+
+    useEffect(() => {
+        if (sessionStorage.token) {
+            navigate('/dashboard');
+        }
+    }, [ navigate])
+
+    const submit = async (e: any) => {
+        e.preventDefault();
+        const form = {
+            nombre:user,
+            email,
+            password
+        };
+        try {
+            const { data } = await axios.post(`${process.env.REACT_APP_APIEP}/login/signin`, form);
+    
+            if (data.status === parseInt('401')) {
+                setErrorMessage(data.response);
+            } else {
+                sessionStorage.setItem('token', data.token);
+                navigate('/dashboard');
+            }
+        } catch (error: any) {
+            setErrorMessage(error.message);
+            setTimeout(() => {
+                setErrorMessage('');
+            }, 3000);
+        }
+    };
     return (
-        <div className="Login">
-            <header className="Login-header">
-                <img src={logo} className="Login-logo" alt="logo" />
-            </header>
-        </div>
+        <form onSubmit={submit} className="Login container mt-10">
+            <br /><br /><br />
+            <span className={'text-danger fs-1 ' + (errorMessage !== '' ? '' : 'd-none')}>{errorMessage}</span>
+            <br /><br /><br />
+            <b className='fs-1'>Login</b>
+            <br />
+            <div className='row'>
+                <div className='col-sm-12 col-lg-6'>
+                    <input type="email" className="form-control" placeholder="Email" value={email} onInput={(e) => setEmail(e.currentTarget.value)} aria-label='email input' required={user !== '' ? false : true} disabled={user !== '' ? true : false} />
+                </div>
+                <div className='col-sm-12 col-lg-6'>
+                    <input type="text" className="form-control" placeholder="User" value={user} onInput={(e) => setUser(e.currentTarget.value)} aria-label='user input' required={email !== '' ? false : true} disabled={email !== '' ? true : false} />
+                </div>
+                <div className='col-sm-12 col-md-12 col-lg-12'>
+                    <br />
+                    <input type="password" className="form-control" placeholder="Password" value={password} onInput={(e) => setPassword(e.currentTarget.value)} aria-label='password input' required />
+                </div>
+                <div className='col-sm-12 col-md-12 col-lg-12'>
+                    <br />
+                    <button type='submit' className='btn btn-primary w-100' aria-label='login button'>
+                        <FontAwesomeIcon icon={iconSend} />
+                    </button>
+                </div>
+            </div>
+        </form>
     );
 }
 
