@@ -1,5 +1,4 @@
-import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import * as bcrypt from 'bcryptjs';
@@ -24,8 +23,16 @@ export class UsuarioServicio {
         return this.repo.findOneBy({ email });
     }
 
-    async add(usuario: Usuarios): Promise<void> {
-        await this.repo.create(usuario);
+    async add(user: Usuarios): Promise<void> {
+        const salt = await bcrypt.genSalt();
+        const hash = await bcrypt.hash(user.password, salt);
+        const data = {
+            nombre: user.nombre,
+            email: user.email,
+            password: hash,
+            role: user?.role ? '1' : user.role.toString(),
+        };
+        await this.repo.create(data);
     }
 
     async update(usuario: Usuarios): Promise<void> {
@@ -34,39 +41,5 @@ export class UsuarioServicio {
 
     async remove(id: number): Promise<void> {
         await this.repo.delete({ id });
-    }
-
-    async signin(user: Usuarios, jwt: JwtService): Promise<any> {
-        const foundUser = await this.findOneByEmail(user.email);
-        if (foundUser) {
-            const { password } = foundUser;
-            if (await bcrypt.compare(user.password, password)) {
-                const payload = { email: user.email };
-                return {
-                    token: jwt.sign(payload),
-                };
-            }
-            return new HttpException(
-                'Incorrect username or password',
-                HttpStatus.UNAUTHORIZED,
-            );
-        }
-        return new HttpException(
-            'Incorrect username or password',
-            HttpStatus.UNAUTHORIZED,
-        );
-    }
-
-    async signup(user: Usuarios): Promise<Usuarios> {
-        const salt = await bcrypt.genSalt();
-        const hash = await bcrypt.hash(user.password, salt);
-        const reqBody = {
-            nombre: user.nombre,
-            email: user.email,
-            password: hash,
-            role: user?.role ? '1' : user.role.toString(),
-        };
-        const newUser = await this.repo.create(reqBody);
-        return newUser;
     }
 }

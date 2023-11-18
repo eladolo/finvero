@@ -17,12 +17,16 @@ import { OrdenesModule } from '../modules/Ordenes.module';
 import { OrdenesController } from '../controllers/Ordenes.controller';
 import { OrdenesServicio } from '../services/Orden.service';
 import { Ordenes } from '../entities/Orden.entity';
+import { SignupModule } from '../modules/signup.module';
+import { SignupController } from '../controllers/signup.controller';
+import { SignupServicio } from '../services/signup.service';
 @Module({
     imports: [
         Repository,
         UsuarioModule,
         ProductosModule,
         OrdenesModule,
+        SignupModule,
         TypeOrmModule.forRoot({
             type: 'mysql',
             host: process.env.DB_HOST,
@@ -39,8 +43,8 @@ import { Ordenes } from '../entities/Orden.entity';
             signOptions: { expiresIn: '2h' },
         }),
     ],
-    controllers: [AppController],
-    providers: [AppService, UsuarioServicio, ProductosServicio, OrdenesServicio],
+    controllers: [AppController, SignupController],
+    providers: [AppService, UsuarioServicio, ProductosServicio, OrdenesServicio, SignupServicio],
 })
 export class AppModule {
     constructor(private dataSource: DataSource) {}
