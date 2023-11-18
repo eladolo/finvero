@@ -19,20 +19,20 @@ services:
       interval: 18s
       timeout: 6s
       retries: 3
-  ws:
+  be:
     build:
-      context: .
-      dockerfile: DockerfileWS
+      context: ../
+      dockerfile: DEV/Dockerfile.BE
     command: npm run start:dev
     ports:
       - "8001:3000"
     volumes:
-      - ./ws:/ws
+      - ../BE:/BE
     env_file:
       - .env
     depends_on:
       db:
         condition: service_healthy
 volumes:
-  ws:
-  my-db:
+  BE: {}
+  my-db: {}

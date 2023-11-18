@@ -1,14 +1,14 @@
 services:
-  app:
+  fe:
     build:
-      context: .
-      dockerfile: DockerfileAPP
+      context: ../
+      dockerfile: DEV/Dockerfile.FE
     command: npm run start
     ports:
       - "8000:3000"
     volumes:
-      - ./app:/app
+      - ../FE:/FE
     environment:
       - CHOKIDAR_USEPOLLING=true
 volumes:
-  app:
+  FE: {}

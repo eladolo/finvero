@@ -1,7 +1,7 @@
 FROM base-image
 
-COPY ./app ./app
+COPY ./FE ./FE
 
-WORKDIR /app
+WORKDIR /FE
 
 RUN npm install

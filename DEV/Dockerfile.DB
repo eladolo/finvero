@@ -1,0 +1,7 @@
+FROM base-image
+
+COPY ../DB ./DB
+
+WORKDIR /DB
+
+RUN npm install

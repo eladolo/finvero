@@ -1,17 +1,17 @@
 services:
   dbapp:
     build:
-      context: .
-      dockerfile: DockerfileDBAPP
+      context: ../
+      dockerfile: DEV/Dockerfile.DB
     command: npm run migrate
     ports:
       - "8002:5002"
     volumes:
-      - dbapp:/dbapp
+      - ../DB:/DB
     env_file:
       - .env
     depends_on:
       db:
         condition: service_healthy
 volumes:
-  dbapp:
+  DB: {}
