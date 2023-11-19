@@ -27,20 +27,22 @@ export class UsuarioController {
     }
 
     @Post()
-    async createUsuario(@Res() response: any): Promise<Usuarios[]> {
-        const usuarios = await this.service.add(Req.arguments.orden);
+    async createUsuario(@Res() response: any, @Req() request: any): Promise<Usuarios[]> {
+        const usuarios = await this.service.add(request.body.usuario);
         return response.status(HttpStatus.OK).json(usuarios);
     }
 
     @Patch()
-    async updateUsuario(@Res() response: any): Promise<Usuarios[]> {
-        const usuarios = await this.service.update(Req.arguments.orden);
+    async updateUsuario(@Res() response: any, @Req() request: any): Promise<Usuarios[]> {
+        await this.service.update(request.body.usuario);
+        const usuarios = await this.service.findAll();
         return response.status(HttpStatus.OK).json(usuarios);
     }
 
     @Delete()
-    async deleteUsuario(@Res() response: any): Promise<Usuarios[]> {
-        const usuarios = await this.service.remove(Req.arguments.id);
+    async deleteUsuario(@Res() response: any, @Req() request: any): Promise<Usuarios[]> {
+        await this.service.remove(request.body.id);
+        const usuarios = await this.service.findAll();
         return response.status(HttpStatus.OK).json(usuarios);
     }
 }

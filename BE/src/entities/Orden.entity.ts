@@ -16,4 +16,10 @@ export class Ordenes {
 
     @Column()
     products: string;
+
+    @Column()
+    createdAt: Date;
+
+    @Column()
+    updatedAt: Date;
 }

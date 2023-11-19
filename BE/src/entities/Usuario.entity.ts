@@ -20,4 +20,10 @@ export class Usuarios {
 
     @Column()
     role: string;
+
+    @Column()
+    createdAt: Date;
+
+    @Column()
+    updatedAt: Date;
 }

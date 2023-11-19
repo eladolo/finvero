@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import 'bootstrap/dist/css/bootstrap.css';
 import '../assets/Login.css';
 
-function Login() {
+function Registro() {
     const dispatch = useDispatch()
     const [errorMessage, setErrorMessage] = useState('');
     const [user, setUser] = useState('');
@@ -29,14 +29,20 @@ function Login() {
             password
         };
         try {
-            const { data } = await axios.post(`${process.env.REACT_APP_APIEP}/login/signin`, form);
+            const { data } = await axios.post(`${process.env.REACT_APP_APIEP}/login/signup`, form);
     
-            if (data.status === parseInt('401')) {
+            if (data.status >= 400) {
                 setErrorMessage(data.response);
             } else {
-                sessionStorage.setItem('token', data.token);
-                dispatch({type: 'users/setUser', payload: data });
-                navigate('/dashboard');
+                const { data } = await axios.post(`${process.env.REACT_APP_APIEP}/login/signin`, form);
+
+                if (data.status === parseInt('401')) {
+                    setErrorMessage(data.response);
+                } else {
+                    sessionStorage.setItem('token', data.token);
+                    dispatch({type: 'users/setUser', payload: data });
+                    navigate('/dashboard');
+                }
             }
         } catch (error: any) {
             setErrorMessage(error.message);
@@ -50,14 +56,14 @@ function Login() {
             <br /><br /><br />
             <span className={'text-danger fs-1 ' + (errorMessage !== '' ? '' : 'd-none')}>{errorMessage}</span>
             <br /><br /><br />
-            <b className='fs-1'>Login</b>
+            <b className='fs-1'>Registro</b>
             <br />
             <div className='row'>
                 <div className='col-sm-12 col-lg-6'>
-                    <input type="email" className="form-control" placeholder="Email" value={email} onInput={(e) => setEmail(e.currentTarget.value)} aria-label='email input' required={user !== '' ? false : true} disabled={user !== '' ? true : false} />
+                    <input type="email" className="form-control" placeholder="Email" value={email} onInput={(e) => setEmail(e.currentTarget.value)} aria-label='email input' required />
                 </div>
                 <div className='col-sm-12 col-lg-6'>
-                    <input type="text" className="form-control" placeholder="User" value={user} onInput={(e) => setUser(e.currentTarget.value)} aria-label='user input' required={email !== '' ? false : true} disabled={email !== '' ? true : false} />
+                    <input type="text" className="form-control" placeholder="User" value={user} onInput={(e) => setUser(e.currentTarget.value)} aria-label='user input' required />
                 </div>
                 <div className='col-sm-12 col-md-12 col-lg-12'>
                     <br />
@@ -71,8 +77,8 @@ function Login() {
                 </div>
                 <div className='col-sm-12 col-md-12 col-lg-12'>
                     <br />
-                    <button type='button' className='btn btn-secondary w-100' aria-label='login button' onClick={() => navigate("/registro")}>
-                        Registro
+                    <button type='button' className='btn btn-secondary w-100' aria-label='login button' onClick={() => navigate("/")}>
+                        Login
                     </button>
                 </div>
             </div>
@@ -80,4 +86,4 @@ function Login() {
     );
 }
 
-export default Login;
+export default Registro;

@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 const Navbar = () => {
     const iconHome: any = "fa-solid fa-house"
@@ -8,6 +8,7 @@ const Navbar = () => {
     const iconUsers: any = "fa-solid fa-user"
     const iconLogout: any = "fa-solid fa-lock"
     
+    const userdata = useSelector((state: any) => state.users.user || {});
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const logout = () => {
@@ -29,9 +30,13 @@ const Navbar = () => {
                     <span className='btn btn-secondary float-start nav-item' onClick={() => gotTo('/ordenes')}>
                         <FontAwesomeIcon icon={iconClipboard} />
                     </span>
-                    <span className='btn btn-warning float-start nav-item' onClick={() => gotTo('/usuarios')}>
-                        <FontAwesomeIcon icon={iconUsers} />
-                    </span>
+                    {
+                        userdata.role >= 80 ? (
+                            <span className='btn btn-warning float-start nav-item' onClick={() => gotTo('/usuarios')}>
+                                <FontAwesomeIcon icon={iconUsers} />
+                            </span>
+                        ) : ''
+                    }
                     <span className='btn btn-danger float-end' onClick={logout}>
                         <FontAwesomeIcon icon={iconLogout} />
                     </span>

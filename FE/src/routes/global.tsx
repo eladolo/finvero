@@ -1,6 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 import ProtectedRoutes from '../components/UI/ProtectedRoutes';
 import Login from '../views/Login';
+import Registro from '../views/Registro';
 import Dashboard from '../views/Dashboard';
 import Ordenes from '../views/Ordenes';
 import Usuarios from '../views/Usuarios';
@@ -10,6 +11,11 @@ const router = createBrowserRouter([
     {
         path: '/',
         element: <Login />,
+        errorElement: <ErrorPage />,
+    },
+    {
+        path: '/registro',
+        element: <Registro />,
         errorElement: <ErrorPage />,
     },
     {

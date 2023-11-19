@@ -19,9 +19,7 @@ export class SignupController {
     @Post('/signup')
     async Signup(@Res() response: any, @Body() user: Usuarios) {
         const newUSer = await this.service.signup(user);
-        return response.status(HttpStatus.CREATED).json({
-            newUSer,
-        });
+        return response.status(HttpStatus.CREATED).json(newUSer);
     }
     @Post('/signin')
     async SignIn(@Res() response: any, @Body() user: Usuarios) {

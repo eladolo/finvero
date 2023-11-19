@@ -19,4 +19,10 @@ export class Productos {
 
     @Column()
     cantidad: number;
+
+    @Column()
+    createdAt: Date;
+
+    @Column()
+    updatedAt: Date;
 }
