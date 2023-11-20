@@ -22,24 +22,41 @@ module.exports = (sequelize, DataTypes) => {
             uid: {
                 allowNull: false,
                 type: DataTypes.INTEGER,
+                oneToOne: true,
+                references: {
+                    model: Usuarios,
+                    key: 'id'
+                },
             },
             nombre: {
                 allowNull: false,
                 type: DataTypes.STRING,
+                unique: true
             },
             precio: {
                 allowNull: false,
-                type: DataTypes.INTEGER,
+                type: DataTypes.FLOAT(11),
             },
             cantidad: {
                 allowNull: false,
                 type: DataTypes.INTEGER,
+            },
+            createdAt: {
+                allowNull: false,
+                type: Sequelize.DATE,
+            },
+            updatedAt: {
+                allowNull: false,
+                type: Sequelize.DATE,
             },
         },
         {
             sequelize,
             modelName: 'Productos',
             tableName: 'Productos',
+            timestamps: true,
+            createdAt: true,
+            updatedAt: true
         },
     );
     return Productos;

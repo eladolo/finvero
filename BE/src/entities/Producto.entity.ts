@@ -5,7 +5,7 @@ import { Entity, Column, PrimaryGeneratedColumn, PrimaryColumn } from 'typeorm';
     schema: 'Productos',
 })
 export class Productos {
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn('increment')
     id: number;
 
     @Column()
@@ -14,7 +14,7 @@ export class Productos {
     @Column()
     nombre: string;
 
-    @Column()
+    @Column('decimal', { precision: 6, scale: 2})
     precio: number;
 
     @Column()

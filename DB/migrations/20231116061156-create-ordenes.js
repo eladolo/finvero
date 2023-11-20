@@ -4,22 +4,31 @@ module.exports = {
     async up(queryInterface, Sequelize) {
         await queryInterface.createTable('Ordenes', {
             id: {
-                allowNull: false,
+                type: Sequelize.INTEGER,
                 autoIncrement: true,
                 primaryKey: true,
-                type: Sequelize.INTEGER,
-            },
-            id: {
-                type: Sequelize.INTEGER,
+                allowNull: false,
             },
             uid: {
+                allowNull: false,
                 type: Sequelize.INTEGER,
+                onToOne: true,
+                references: {
+                    model: 'Usuarios',
+                    key: 'id'
+                },
+            },
+            nombre: {
+                allowNull: false,
+                type: Sequelize.STRING
             },
             total: {
-                type: Sequelize.INTEGER,
+                allowNull: false,
+                type: Sequelize.FLOAT(11),
             },
-            products: {
-                type: Sequelize.STRING,
+            productos: {
+                allowNull: false,
+                type: Sequelize.TEXT('long'),
             },
             createdAt: {
                 allowNull: false,

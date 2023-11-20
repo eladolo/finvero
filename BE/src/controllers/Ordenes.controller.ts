@@ -20,32 +20,32 @@ export class OrdenesController {
     ) {}
 
     @Get()
-    async allOrdenes(@Res() response: any): Promise<Ordenes[]> {
-        const productos = await this.service.findByUID(Req.arguments.uid);
+    async allOrdenes(@Res() response: any, @Req() request: any): Promise<Ordenes[]> {
+        const productos = await this.service.findAll();
         return response.status(HttpStatus.OK).json(productos);
     }
 
     @Get('/user')
-    async ordenesbyUser(@Res() response: any): Promise<Ordenes[]> {
-        const ordenes = await this.service.findByUID(Req.arguments.uid);
+    async ordenesbyUser(@Res() response: any, @Req() request: any): Promise<Ordenes[]> {
+        const ordenes = await this.service.findByUID(request.body.id);
         return response.status(HttpStatus.OK).json(ordenes);
     }
 
     @Post()
-    async createOrder(@Res() response: any): Promise<Ordenes[]> {
-        const ordenes = await this.service.add(Req.arguments.orden);
+    async createOrder(@Res() response: any, @Req() request: any): Promise<Ordenes[]> {
+        const ordenes = await this.service.add(request.body.orden);
         return response.status(HttpStatus.OK).json(ordenes);
     }
 
     @Patch()
-    async updateOrder(@Res() response: any): Promise<Ordenes[]> {
-        const ordenes = await this.service.update(Req.arguments.orden);
+    async updateOrder(@Res() response: any, @Req() request: any): Promise<Ordenes[]> {
+        const ordenes = await this.service.update(request.body.orden);
         return response.status(HttpStatus.OK).json(ordenes);
     }
 
     @Delete()
-    async deleteOrder(@Res() response: any): Promise<Ordenes[]> {
-        const ordenes = await this.service.remove(Req.arguments.id);
+    async deleteOrder(@Res() response: any, @Req() request: any): Promise<Ordenes[]> {
+        const ordenes = await this.service.remove(request.body.id);
         return response.status(HttpStatus.OK).json(ordenes);
     }
 }

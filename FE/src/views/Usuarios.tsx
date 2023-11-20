@@ -111,6 +111,11 @@ function Usuarios() {
                                     }
                                 </div>
                             })}
+                            {users.length === 0 ? (
+                                <div className='col-sm-12 col-md-12 col-lg-12'>
+                                    <h1>Agrega un nuevo usuario</h1>
+                                </div>
+                            ) : ''}
                         </div>
                     </div>
                     <div className={`tab-pane fade container ${activeTab === 'editor' ? 'show active' : ''}`} id="nav-editor" role="tabpanel" aria-labelledby="nav-editor-tab">

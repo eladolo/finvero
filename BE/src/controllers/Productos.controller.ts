@@ -20,32 +20,32 @@ export class ProductosController {
     ) {}
 
     @Get()
-    async allProductos(@Res() response: any): Promise<Productos[]> {
-        const productos = await this.service.findByUID(Req.arguments.uid);
+    async allProductos(@Res() response: any, @Req() request: any): Promise<Productos[]> {
+        const productos = await this.service.findByUID(request.body.id);
         return response.status(HttpStatus.OK).json(productos);
     }
 
     @Get('/user')
-    async productosbyUser(@Res() response: any): Promise<Productos[]> {
-        const productos = await this.service.findByUID(Req.arguments.uid);
+    async productosbyUser(@Res() response: any, @Req() request: any): Promise<Productos[]> {
+        const productos = await this.service.findByUID(request.body.id);
         return response.status(HttpStatus.OK).json(productos);
     }
 
     @Post()
-    async createOrder(@Res() response: any): Promise<Productos[]> {
-        const productos = await this.service.add(Req.arguments.producto);
+    async createOrder(@Res() response: any, @Req() request: any): Promise<Productos[]> {
+        const productos = await this.service.add(request.body.producto);
         return response.status(HttpStatus.OK).json(productos);
     }
 
     @Patch()
-    async updateOrder(@Res() response: any): Promise<Productos[]> {
-        const productos = await this.service.update(Req.arguments.producto);
+    async updateOrder(@Res() response: any, @Req() request: any): Promise<Productos[]> {
+        const productos = await this.service.update(request.body.producto);
         return response.status(HttpStatus.OK).json(productos);
     }
 
     @Delete()
-    async deleteOrder(@Res() response: any): Promise<Productos[]> {
-        const productos = await this.service.remove(Req.arguments.id);
+    async deleteOrder(@Res() response: any, @Req() request: any): Promise<Productos[]> {
+        const productos = await this.service.remove(request.body.id);
         return response.status(HttpStatus.OK).json(productos);
     }
 }

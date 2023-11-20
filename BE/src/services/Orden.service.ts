@@ -23,7 +23,12 @@ export class OrdenesServicio {
     }
 
     async add(orden: Ordenes): Promise<void> {
-        await this.repo.create(orden);
+        const data = {
+            ...orden,
+            createdAt: new Date(),
+            updatedAt: new Date()
+        }
+        await this.repo.save(data);
     }
 
     async update(orden: Ordenes): Promise<void> {

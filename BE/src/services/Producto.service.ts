@@ -23,11 +23,20 @@ export class ProductosServicio {
     }
 
     async add(producto: Productos): Promise<void> {
-        await this.repo.create(producto);
+        const data = {
+            ...producto,
+            createdAt: new Date(),
+            updatedAt: new Date()
+        }
+        await this.repo.save(data);
     }
 
     async update(producto: Productos): Promise<void> {
-        await this.repo.update(producto.id, producto);
+        const data = {
+            ...producto,
+            updatedAt: new Date()
+        }
+        await this.repo.save(data);
     }
 
     async remove(id: number): Promise<void> {

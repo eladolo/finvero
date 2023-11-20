@@ -22,20 +22,40 @@ module.exports = (sequelize, DataTypes) => {
             uid: {
                 allowNull: false,
                 type: DataTypes.INTEGER,
+                onToOne: true,
+                references: {
+                    model: Usuarios,
+                    key: 'id'
+                },
+            },
+            nombre: {
+                allowNull: false,
+                type: DataTypes.STRING
             },
             total: {
                 allowNull: false,
-                type: DataTypes.INTEGER,
+                type: DataTypes.FLOAT(11),
             },
-            products: {
+            productos: {
                 allowNull: false,
-                type: DataTypes.STRING,
+                type: DataTypes.TEXT('long'),
+            },
+            createdAt: {
+                allowNull: false,
+                type: Sequelize.DATE,
+            },
+            updatedAt: {
+                allowNull: false,
+                type: Sequelize.DATE,
             },
         },
         {
             sequelize,
             modelName: 'Ordenes',
             tableName: 'Ordenes',
+            timestamps: true,
+            createdAt: true,
+            updatedAt: true
         },
     );
     return Ordenes;
