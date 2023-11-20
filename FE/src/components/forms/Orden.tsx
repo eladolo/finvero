@@ -226,7 +226,11 @@ function OrdenForm(props: any) {
                                                     <h2 className='text-truncate' title={producto.nombre}>{producto.nombre}</h2>
                                                     Disponibles: <b>{producto.cantidad - producto.addToCart}</b><br/>
                                                     En orden: <b>{producto.addToCart}</b><br/>
-                                                    <input type="range" className='input-range-control w-100' value={producto.addToCart} max={producto.cantidad} onInput={(e) => updateProductos(producto, e.currentTarget.value)}/>
+                                                    {
+                                                        !props.isediting ? (
+                                                            <input type="range" className='input-range-control w-100' value={producto.addToCart} max={producto.cantidad} onInput={(e) => updateProductos(producto, e.currentTarget.value)}/>
+                                                        ) : ''
+                                                    }
                                                 </div>
                                             })}
                                             {productos.length === 0 ? (

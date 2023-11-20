@@ -50,7 +50,6 @@ export class OrdenesServicio {
 
     async update(orden: Ordenes): Promise<void> {
         await this.repo.update(orden.id, orden);
-        await this.updateOrdenProductos(JSON.parse(orden.productos));
     }
 
     async remove(id: number): Promise<void> {

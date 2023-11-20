@@ -129,7 +129,7 @@ function Ordenes() {
                         </div>
                     </div>
                     <div className={`tab-pane fade container ${activeTab === 'editor' ? 'show active' : ''}`} id="nav-editor" role="tabpanel" aria-labelledby="nav-editor-tab">
-                            <OrdenForm orden={ordenEdit} reset={resetEdit}/>
+                            <OrdenForm orden={ordenEdit} reset={resetEdit} isediting={isEditing} />
                     </div>
                 </div>
             </div>
