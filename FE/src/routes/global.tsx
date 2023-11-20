@@ -1,11 +1,11 @@
 import { createBrowserRouter } from 'react-router-dom';
-import ProtectedRoutes from '../components/UI/ProtectedRoutes';
+import ProtectedRoutes from '../components/UX/ProtectedRoutes';
 import Login from '../views/Login';
 import Registro from '../views/Registro';
 import Dashboard from '../views/Dashboard';
 import Ordenes from '../views/Ordenes';
 import Usuarios from '../views/Usuarios';
-import ErrorPage from '../components/UI/ErrorPage';
+import ErrorPage from '../components/UX/ErrorPage';
 
 const router = createBrowserRouter([
     {

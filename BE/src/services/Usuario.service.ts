@@ -38,7 +38,7 @@ export class UsuarioServicio {
                 updatedAt: new Date(),
             };
             const response = await this.repo.save(data);
-            console.log(response);
+            // console.log(response);
             return response;
 
         }
@@ -53,7 +53,7 @@ export class UsuarioServicio {
         }
         delete usuario.oldpassword
         const response = await this.repo.save(usuario);
-        console.log(response);
+        // console.log(response);
         return response
     }
 

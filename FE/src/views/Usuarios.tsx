@@ -18,14 +18,33 @@ function Usuarios() {
     const iconPencil: any = 'fas fa-pencil';
     const iconTrash: any = 'fas fa-trash red';
 
-    const resetEdit = () => {
+    const getUsers = React.useCallback(() => {
+        const asyncExec = async () => {
+            try {
+                const { data } = await axios.get(`${process.env.REACT_APP_APIEP}/usuarios`, {
+                    headers: {
+                        Authorization: `Bearer ${userdata.token}`
+                    }
+                })
+    
+                if (data.status === 400) {
+                    throw new Error(data.message)
+                }
+                dispatch({type: 'users/setAll', payload: data})
+            } catch (error: any) {
+                console.error(error)
+            }
+        }
+        asyncExec()
+    }, [dispatch, userdata]);
+    const resetEdit = React.useCallback(() => {
         setUserEdit(null)
         setIsEditing(false)
         setActiveTab('home')
         setTimeout(() =>{
             getUsers()
         }, 300)
-    };
+    }, [getUsers]);
     const edit = (user: any) => {
         setUserEdit(user)
         setIsEditing(true)
@@ -56,30 +75,6 @@ function Usuarios() {
 
         asyncExec()
     };
-    const getUsers = () => {
-        const asyncExec = async () => {
-            try {
-                const { data } = await axios.get(`${process.env.REACT_APP_APIEP}/usuarios`, {
-                    headers: {
-                        Authorization: `Bearer ${userdata.token}`
-                    }
-                })
-    
-                if (data.status === 400) {
-                    throw new Error(data.message)
-                }
-                dispatch({type: 'users/setAll', payload: data})
-            } catch (error: any) {
-                console.error(error)
-            }
-        }
-        asyncExec()
-    };
-
-    React.useEffect(() => {
-        resetEdit()
-    }, []);
-
     return (
         <div className="Usuarios">
             <Navbar />
