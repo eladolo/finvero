@@ -1,5 +1,5 @@
 import React from 'react';
-import '../assets/Login.css';
+import '../assets/Orden.scss';
 import axios from 'axios';
 import Navbar from '../components/containers/Navbar';
 import ProductosList from '../components/UI/ProductosList';
@@ -97,7 +97,7 @@ function Ordenes() {
                     <button className={`nav-link ${activeTab === 'editor' ? 'active' : ''}`} id="nav-editor-tab" type="button" role="tab" aria-controls="nav-editor" aria-selected="false"><FontAwesomeIcon icon={isEditing ? iconPencil : iconPlus} onClick={() => {setActiveTab('editor');}} /></button>
                 </div>
                 <div className="tab-content" id="ordenesTabs">
-                    <div className={`tab-pane fade container ${activeTab === 'home' ? 'show active' : ''}`} id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                    <div className={`tab-pane fade container h-82 overflow-auto ${activeTab === 'home' ? 'show active' : ''}`} id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                         <div className='row p-4'>
                             {ordenes.map((orden: any, index: number) => {
                                 return <div className="orden-item border border-success rounded overflow-hidden m-1 mb-1 fs-4 col-sm-12 col-md-12 col-lg-12 p-4" key={`orden-li-${index}`}>

@@ -1,5 +1,5 @@
 import React from 'react';
-import '../assets/Login.css';
+import '../assets/Usuario.scss';
 import axios from 'axios';
 import Navbar from '../components/containers/Navbar';
 import UserForm from '../components/forms/Usuario';
@@ -89,8 +89,8 @@ function Usuarios() {
                     <button className={`nav-link ${activeTab === 'editor' ? 'active' : ''}`} id="nav-editor-tab" type="button" role="tab" aria-controls="nav-editor" aria-selected="false"><FontAwesomeIcon icon={isEditing ? iconPencil : iconPlus} onClick={() => {setActiveTab('editor');}} /></button>
                 </div>
                 <div className="tab-content p-2" id="usuariosTabs">
-                    <div className={`tab-pane fade container ${activeTab === 'home' ? 'show active' : ''}`} id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                        <div className='row'>
+                    <div className={`tab-pane fade container h-82 overflow-auto ${activeTab === 'home' ? 'show active' : ''}`} id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                        <div className='row p-2'>
                             {users.map((user: any, index: number) => {
                                 return <div className="user-item border border-success rounded overflow-hidden m-1 p-2 mb-1 fs-4 col-sm-12 col-md-12 col-lg-12" key={`user-li-${index}`}>
                                     id: <b className='text-truncate'>{user.email}</b> <br />

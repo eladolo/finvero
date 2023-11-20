@@ -269,8 +269,8 @@ function OrdenForm(props: any) {
                         </div>
                     </form>
                 </div>
-                <div className={`tab-pane fade container ${activeTab === 'producto' ? 'show active' : ''}`} id="nav-producto" role="tabpanel" aria-labelledby="nav-producto-tab">
-                    <div className='row'>
+                <div className={`tab-pane fade container h-70 overflow-auto ${activeTab === 'producto' ? 'show active' : ''}`} id="nav-producto" role="tabpanel" aria-labelledby="nav-producto-tab">
+                    <div className='row p-4'>
                         {productos.map((producto: any, index: number) => {
                             return <div className="user-item border border-success rounded overflow-hidden m-1 mb-1 fs-4 col-sm-12 col-md-12 col-lg-12 p-2" key={`user-li-${index}`}>
                                 <h1 className='text-truncate'>
