@@ -86,7 +86,7 @@ function Usuarios() {
                 <div className="tab-content p-2" id="usuariosTabs">
                     <div className={`tab-pane fade container h-82 overflow-auto ${activeTab === 'home' ? 'show active' : ''}`} id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                         <div className='row p-2'>
-                            {users.map((user: any, index: number) => {
+                            {users.slice(0).sort((a: any,b: any)=>b.id-a.id).map((user: any, index: number) => {
                                 return <div className="user-item border border-success rounded overflow-hidden m-1 p-2 mb-1 fs-4 col-sm-12 col-md-12 col-lg-12" key={`user-li-${index}`}>
                                     id: <b className='text-truncate'>{user.email}</b> <br />
                                     nombre: <b>{user.nombre}</b>

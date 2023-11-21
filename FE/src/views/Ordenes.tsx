@@ -99,7 +99,7 @@ function Ordenes() {
                 <div className="tab-content" id="ordenesTabs">
                     <div className={`tab-pane fade container h-82 overflow-auto ${activeTab === 'home' ? 'show active' : ''}`} id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                         <div className='row p-4'>
-                            {ordenes.map((orden: any, index: number) => {
+                            {ordenes.slice(0).sort((a: any,b: any)=>b.id-a.id).map((orden: any, index: number) => {
                                 return <div className="orden-item border border-success rounded overflow-hidden m-1 mb-1 fs-4 col-sm-12 col-md-12 col-lg-12 p-4" key={`orden-li-${index}`}>
                                     {
                                         userdata.role >= 50 ? (

@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import 'bootstrap/dist/css/bootstrap.css';
-import '../assets/Login.css';
+import '../assets/Login.scss';
 
 function Registro() {
     const dispatch = useDispatch()
