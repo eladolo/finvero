@@ -282,10 +282,10 @@ function OrdenForm(props: any) {
                                     userdata.role >= 50 ? (
                                         <>
                                             <FontAwesomeIcon icon={iconTrash} className='btn btn-danger float-end' onClick={() => del(producto.id)} />
-                                            <FontAwesomeIcon icon={iconPencil} className='btn btn-secondary float-end' onClick={() => edit(producto)} />
                                         </>
                                     ) : ''
                                 }
+                                <FontAwesomeIcon icon={iconPencil} className='btn btn-secondary float-end' onClick={() => edit(producto)} />
                             </div>
                         })}
                         {productos.length === 0 ? (
