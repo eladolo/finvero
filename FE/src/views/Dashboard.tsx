@@ -130,18 +130,22 @@ function Dashboard() {
             <span className='float-end p-2'>{userdata?.nombre || ''}</span>
             <Navbar />
             <div className='nav nav-tabs' role='tablist' id="dashboard-tabs">
-                <button className="nav-link" data-bs-toggle="tab" data-bs-target="#dashboard-reportes" type="button" role="tab" aria-controls="nav-dashboard-reportes" aria-selected="true">
+                <button className="nav-link active" data-bs-toggle="tab" data-bs-target="#dashboard-reportes" type="button" role="tab" aria-controls="nav-dashboard-reportes" aria-selected="true">
                     Reportes
                 </button>
-                <button className="nav-link active" data-bs-toggle="tab" data-bs-target="#dashboard-graficas" type="button" role="tab" aria-controls="nav-dashboard-graficas" aria-selected="false">
-                    Gráficas
-                </button>
+                {
+                    dataTabla.length > 0 ? (
+                        <button className="nav-link" data-bs-toggle="tab" data-bs-target="#dashboard-graficas" type="button" role="tab" aria-controls="nav-dashboard-graficas" aria-selected="false">
+                            Gráficas
+                        </button>
+                    ) : ''
+                }
             </div>
             <div className='tab-content' id="nav-dashboard-content">
-                <div className='tab-pane fade' id="dashboard-reportes" role="tabpanel" aria-labelledby='nav-dashboard-reportes-tab'>
+                <div className='tab-pane fade show active' id="dashboard-reportes" role="tabpanel" aria-labelledby='nav-dashboard-reportes-tab'>
                     <ReportesTabla headers={headers} data={dataTabla} ordenes={ordenes}></ReportesTabla>
                 </div>
-                <div className='tab-pane fade show active p-4' id="dashboard-graficas" role="tabpanel" aria-labelledby='nav-dashboard-graficas-tab'>
+                <div className='tab-pane fade p-4' id="dashboard-graficas" role="tabpanel" aria-labelledby='nav-dashboard-graficas-tab'>
                     <div className='container'>
                         <div className='row'>
                             <div className='col-sm-12 col-md-6 col-lg-6'>
