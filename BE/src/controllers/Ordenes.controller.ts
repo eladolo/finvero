@@ -27,7 +27,7 @@ export class OrdenesController {
 
     @Get('/user')
     async ordenesbyUser(@Res() response: any, @Req() request: any): Promise<Ordenes[]> {
-        const ordenes = await this.service.findByUID(request.body.id);
+        const ordenes = await this.service.findByUID(request.query.id);
         return response.status(HttpStatus.OK).json(ordenes);
     }
 

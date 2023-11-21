@@ -21,13 +21,13 @@ export class ProductosController {
 
     @Get()
     async allProductos(@Res() response: any, @Req() request: any): Promise<Productos[]> {
-        const productos = await this.service.findByUID(request.body.id);
+        const productos = await this.service.findAll();
         return response.status(HttpStatus.OK).json(productos);
     }
 
     @Get('/user')
     async productosbyUser(@Res() response: any, @Req() request: any): Promise<Productos[]> {
-        const productos = await this.service.findByUID(request.body.id);
+        const productos = await this.service.findByUID(request.query.id);
         return response.status(HttpStatus.OK).json(productos);
     }
 

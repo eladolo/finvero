@@ -21,7 +21,7 @@ export class OrdenesServicio {
     }
 
     findByUID(uid: number): Promise<Ordenes[] | []> {
-        return this.repo.findBy({ uid });
+        return this.repo.findBy({ uid: uid });
     }
 
     async updateOrdenProductos(productos: any): Promise<void> {
