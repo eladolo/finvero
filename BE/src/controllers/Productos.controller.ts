@@ -32,19 +32,19 @@ export class ProductosController {
     }
 
     @Post()
-    async createOrder(@Res() response: any, @Req() request: any): Promise<Productos[]> {
+    async createProducto(@Res() response: any, @Req() request: any): Promise<Productos[]> {
         const productos = await this.service.add(request.body.producto);
         return response.status(HttpStatus.OK).json(productos);
     }
 
     @Patch()
-    async updateOrder(@Res() response: any, @Req() request: any): Promise<Productos[]> {
+    async updateProducto(@Res() response: any, @Req() request: any): Promise<Productos[]> {
         const productos = await this.service.update(request.body.producto);
         return response.status(HttpStatus.OK).json(productos);
     }
 
     @Delete()
-    async deleteOrder(@Res() response: any, @Req() request: any): Promise<Productos[]> {
+    async deleteProducto(@Res() response: any, @Req() request: any): Promise<Productos[]> {
         const productos = await this.service.remove(request.body.id);
         return response.status(HttpStatus.OK).json(productos);
     }
